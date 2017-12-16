@@ -6,8 +6,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'app'
+  name: 'app',
+  created() {
+        axios.get('/api/goods').then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+            });
+      }
 }
 </script>
 
