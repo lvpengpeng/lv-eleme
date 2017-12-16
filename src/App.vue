@@ -9,11 +9,17 @@
 import axios from 'axios'
 export default {
   name: 'app',
+  data (){
+    return {
+      goods:""
+    }
+  },
   created() {
-        axios.get('/api/goods').then(function (response) {
-            console.log(response);
+        axios.get('/api/goods').then((response)=>{
+            this.goods=response.data;
+            console.log(this.goods,"axios.get('/api/goods').then((response)=>{改成箭头函数，不然this是undefined，数据也是undefined")
           })
-          .catch(function (error) {
+          .catch((error)=> {
               console.log(error);
             });
       }
