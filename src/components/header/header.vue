@@ -28,7 +28,18 @@
       <div class="background">
         <img :src="seller.avatar" alt="">
       </div>
-      <div v-show="detailShow" class="detail"></div>
+      <div v-show="detailShow" class="detail">
+          <div class="detail-wrapper clearfix">
+            <div class="datail-main">
+              《步步惊人的命运，却无法掌握自己的结局，个人情感夹杂在争斗的惨烈中备受煎熬。经历几番爱恨嗔痴
+              ，身心俱疲的故事。《步步惊心》是2005年网上连载的穿越小说，作者是桐华。[1]  该小说主要讲述了现
+              为满族少女马尔泰·若曦，身不由己地卷入“九子夺嫡”的纷争。她看透所有人的命运，却无法掌握自己k
+          </div>
+          </div>
+        <div class="detail-close">
+          <i class="icon-close" @click="hideDetail()">3333</i>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -166,10 +177,27 @@
       position: fixed;
       left: 0;
       top:0;
+      z-index:100;
       background: rgba(3,2,1,0.8);
+      overflow: auto;
+      .detail-wrapper{
+        width: 100%;
+        min-height: 100%;overflow: hidden;
+        .datail-main{
+          margin-top: 64px;
+          padding-bottom: 64px;margin-bottom: 20px;
+        }
+      }
+      .detail-close{
+        margin: -64px auto 0;
+        clear:both;
+        background: blue;
+        .icon-close{
+
+        }
+      }
     }
   }
-
 
 
 
