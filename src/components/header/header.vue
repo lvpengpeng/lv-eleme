@@ -28,6 +28,7 @@
       <div class="background">
         <img :src="seller.avatar" alt="">
       </div>
+      <transition name="fade">
       <div v-show="detailShow" class="detail">
           <div class="detail-wrapper clearfix">
             <div class="datail-main">
@@ -37,9 +38,10 @@
           </div>
           </div>
         <div class="detail-close">
-          <i class="icon-close" @click="hideDetail()">3333</i>
+          <i class="icon-close" @click="hideDetail()">close</i>
         </div>
       </div>
+      </transition>
     </div>
 </template>
 
@@ -61,6 +63,9 @@
       methods:{
         showDetails(){
          this.detailShow=true
+        },
+        hideDetail(){
+          this.detailShow=false
         }
       }
     }
@@ -186,19 +191,28 @@
         .datail-main{
           margin-top: 64px;
           padding-bottom: 64px;margin-bottom: 20px;
+          color: #fff
         }
       }
       .detail-close{
         margin: -64px auto 0;
         clear:both;
-        background: blue;
         .icon-close{
-
+          width: 100px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          display: block;
+          margin: 0 auto;
+          background: yellow;
         }
       }
     }
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+      opacity: 0
+    }
   }
-
-
-
 </style>
