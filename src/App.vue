@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <v-header :seller="seller"></v-header>
     <div class="tab">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
@@ -17,17 +18,21 @@
 
 <script>
 import axios from 'axios'
+import header from  './components/header/header'
 export default {
   name: 'app',
+  components:{
+    'v-header':header
+  },
   data (){
     return {
-      goods:""
+      seller:{}
     }
   },
   created() {
-        axios.get('/api/goods').then((response)=>{
-            this.goods=response.data;
-            console.log(this.goods,"axios.get('/api/goods').then((response)=>{改成箭头函数，不然this是undefined，数据也是undefined")
+        axios.get('/api/seller').then((response)=>{
+            this.seller=response.data;
+            console.log(this.seller,"axios.get('/api/goods').then((response)=>{改成箭头函数，不然this是undefined，数据也是undefined")
           })
           .catch((error)=> {
               console.log(error);
