@@ -1,8 +1,16 @@
 <template>
   <div id="app">
-    <router-link to="/goods">Go to goods</router-link>
-    <router-link to="/ratings">Go to ratings</router-link>
-    <router-link to="/seller">Go to seller</router-link>
+    <div class="tab">
+      <div class="tab-item">
+        <router-link to="/goods">商品</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="/ratings">评论</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="/seller">商家</router-link>
+      </div>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -29,5 +37,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+  .tab{
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    .tab-item{
+      flex: 1;
+      text-align: center;
+      a{
+        display:block;
+        font-size:14px;
+        &.active{
+          font-size:14px;
+          color:blue
+        }
+      }
+    }
+  }
 </style>
