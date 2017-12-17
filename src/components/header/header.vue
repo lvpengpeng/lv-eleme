@@ -28,6 +28,7 @@
       <div class="background">
         <img :src="seller.avatar" alt="">
       </div>
+      <div v-show="detailShow" class="detail"></div>
     </div>
 </template>
 
@@ -38,12 +39,17 @@
           type: Object
         }
       },
+      data (){
+        return {
+          detailShow:false
+        }
+      },
       created() {
         this.iconClassMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
       },
       methods:{
         showDetails(){
-          alert(2)
+         this.detailShow=true
         }
       }
     }
@@ -153,6 +159,14 @@
           line-height: 24px;
         }
       }
+    }
+    .detail{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top:0;
+      background: rgba(3,2,1,0.8);
     }
   }
 
