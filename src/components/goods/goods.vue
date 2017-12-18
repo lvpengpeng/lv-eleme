@@ -10,7 +10,36 @@
             </li>
           </ul>
       </div>
-      <div class="foods-wrapper"></div>
+      <div class="foods-wrapper">
+        <ul>
+          <li v-for="item in goods" class="food-list food-list-hook">
+            <h1>{{item.name}}</h1>
+            <ul>
+              <!--@click="goDetail(food)"-->
+              <li v-for="food in item.foods" class="food-item" >
+                <div class="icon">
+                  <img width="57" height="57" :src="food.icon"/>
+                </div>
+                <div class="content">
+                  <h2>{{food.name}}</h2>
+                  <p class="description" v-show="food.description">{{food.description}}</p>
+                  <div class="sell-info">
+                    <span class="sellCount">月售{{food.sellCount}}份</span>
+                    <span class="rating">好评率{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="newPrice"><span class="unit">￥</span>{{food.price}}</span>
+                    <span v-show="food.oldPrice" class="oldPrice">￥{{food.oldPrice}}</span>
+                  </div>
+                  <div class="cartcontrol-wrapper">
+                    <!--<cartcontrol :food="food"></cartcontrol>-->
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
 </template>
 
@@ -49,7 +78,7 @@
   bottom: 46px;
   width: 100%;
   overflow:hidden;
-  background: #ddd;
+  background: #ffffff;
   .menu-wrapper{
       /*flex:参数依次代表;等分，内容缩放，站位*/
     flex:0 0 80px;
@@ -104,6 +133,34 @@
   }
   .foods-wrapper{
     flex: 1;
+    .food-list{
+      h1{
+        padding-left: 14px;
+        height: 26px;
+        line-height: 26px;
+        border-left: 2px solid #d9dde1;
+        font-size: 12px;
+        color: rgb(147,153,159);
+        background: #ddd;
+      }
+      .food-item{
+        display: flex;
+        margin: 18px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 18px;
+        &:last-child{
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+        .content{
+          margin-left: 10px;
+          .newPrice{
+            font-size: 16px;
+            color: red;
+          }
+        }
+      }
+    }
   }
 }
 </style>
