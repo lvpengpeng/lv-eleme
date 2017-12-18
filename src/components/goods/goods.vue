@@ -1,6 +1,6 @@
 <template>
     <div class="goods">
-      <div class="menu-wrapper">
+      <div class="menu-wrapper" ref="menuWrapper" >
           <ul>
             <li v-for="item in goods" class="menu-item">
               <span class="text">
@@ -10,7 +10,7 @@
             </li>
           </ul>
       </div>
-      <div class="foods-wrapper">
+      <div class="foods-wrapper" ref="foodsWrapper" >
         <ul>
           <li v-for="item in goods" class="food-list food-list-hook">
             <h1>{{item.name}}</h1>
@@ -45,6 +45,7 @@
 
 <script>
   import axios from 'axios'
+  import  BScrool from  'better-scroll'
     export default {
         props:{
          seller :{
@@ -62,10 +63,22 @@
         axios.get('/api/goods').then((response)=>{
           this.goods=response.data;
           console.log(this.goods,"axios.get('/api/goods').then((response)=>{22222222222222改成箭头函数，111111111不然this是undefined，数据也是undefined")
+        this.$nextTick(()=>{
+          // 把this._initScroll()放在this.$nextTick函数里，是因为由于异步原因vue里改变数据后，dom没有变化。所以放在this.$nextTick方法里，当nextTick的时候，初始化_initScroll()
+          this._initScroll()
+        })
         })
           .catch((error)=> {
             console.log(error);
           });
+      },
+      methods:{
+          _initScroll(){
+            this.menuScrool = new BScrool(this.$refs.menuWrapper,{});
+
+            this.foodsScrool = new BScrool(this.$refs.foodsWrapper,{});
+
+          }
       }
     }
 </script>
