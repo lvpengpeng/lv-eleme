@@ -2,7 +2,7 @@
     <div class="goods">
       <div class="menu-wrapper" ref="menuWrapper" >
           <ul>
-            <li v-for="(item ,index) in goods" :class="index==menuCurrentIndex?'menu-item-selected':'menu-item'">
+            <li v-for="(item ,index) in goods" @click="menuClick(index,$event)" :class="index==menuCurrentIndex?'menu-item-selected':'menu-item'">
               <span class="text">
                 <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>
                 {{item.name}}
@@ -12,6 +12,7 @@
       </div>
       <div class="foods-wrapper" ref="foodsWrapper" >
         <ul>
+          <!--如果用js控制元素，最好单独添加一个class，这个class没有样式，就只赋值js部分，通常后缀名food-list-hook-->
           <li v-for="item in goods" class="food-list food-list-hook">
             <h1>{{item.name}}</h1>
             <ul>
@@ -78,11 +79,13 @@
       methods:{
           _initScroll(){
             this.menuScrool = new BScrool(this.$refs.menuWrapper,{
-
+            click:true
+            //click:true是让滚动区域可点击，不然事件不能调用
             });
 
             this.foodsScrool = new BScrool(this.$refs.foodsWrapper,{
-
+              click:true,
+              //click:true是让滚动区域可点击，不然事件不能调用
               probeType: 3
             });
 
@@ -101,6 +104,14 @@
             this.listHeight.push(height)
           }
 //          console.log(this.listHeight,2222)
+        },
+
+        menuClick(index, event){
+//          console.log(index,event)
+          if (!event._constructed) {
+            return
+          }
+          this.foodsScrool.scrollTo(0, -this.listHeight[index], 300)
         }
       },
       computed:{
