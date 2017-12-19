@@ -208,7 +208,7 @@
       }
       .food-item{
         display: flex;
-        margin: 18px;
+        margin: 18px 18px 0 18px;
         border-bottom: 1px solid #333;
         padding-bottom: 18px;
         &:last-child{
