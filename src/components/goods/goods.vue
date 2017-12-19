@@ -2,7 +2,7 @@
     <div class="goods">
       <div class="menu-wrapper" ref="menuWrapper" >
           <ul>
-            <li v-for="item in goods" class="menu-item">
+            <li v-for="(item ,index) in goods" :class="index==menuCurrentIndex?'menu-item-selected':'menu-item'">
               <span class="text">
                 <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>
                 {{item.name}}
@@ -54,7 +54,9 @@
         },
       data (){
           return {
-            goods :[]
+            goods :[],
+            listHeight:[],
+            foodsScrollY: 0
           }
       },
 
@@ -66,6 +68,7 @@
         this.$nextTick(()=>{
           // 把this._initScroll()放在this.$nextTick函数里，是因为由于异步原因vue里改变数据后，dom没有变化。所以放在this.$nextTick方法里，当nextTick的时候，初始化_initScroll()
           this._initScroll()
+          this._calculateHeight()
         })
         })
           .catch((error)=> {
@@ -74,11 +77,43 @@
       },
       methods:{
           _initScroll(){
-            this.menuScrool = new BScrool(this.$refs.menuWrapper,{});
+            this.menuScrool = new BScrool(this.$refs.menuWrapper,{
 
-            this.foodsScrool = new BScrool(this.$refs.foodsWrapper,{});
+            });
 
+            this.foodsScrool = new BScrool(this.$refs.foodsWrapper,{
+
+              probeType: 3
+            });
+
+            // 监控滚动事件
+            this.foodsScrool.on('scroll', (pos) => {
+              this.foodsScrollY = Math.abs(Math.round(pos.y))
+            })
+          },
+        _calculateHeight(){
+          let foodList = this.$refs.foodsWrapper.querySelectorAll('.food-list-hook');
+          let height = 0
+          this.listHeight.push(height)
+          for (let i = 0, l = foodList.length; i < l; i++) {
+            let item = foodList[i]
+            height += item.clientHeight
+            this.listHeight.push(height)
           }
+//          console.log(this.listHeight,2222)
+        }
+      },
+      computed:{
+        menuCurrentIndex() {
+          for (let i = 0, l = this.listHeight.length; i < l; i++) {
+            let topHeight = this.listHeight[i]
+            let bottomHeight = this.listHeight[i + 1]
+            if (!bottomHeight || (this.foodsScrollY >= topHeight && this.foodsScrollY < bottomHeight)) {
+              return i
+            }
+          }
+          return 0
+        }
       }
     }
 </script>
@@ -98,14 +133,14 @@
     width: 80px;
     /*width如果不写在安卓手机有问题*/
     background:#cccccc;
-    .menu-item{
+    .menu-item-selected,.menu-item{
       text-align: center;
       display: table;
       /*display: table;垂直居中最好的方法*/
       height: 54px;
-      width: 56px;
+      width: 52px;
       line-height: 14px;
-      margin-left: 14px;
+      padding: 0 14px;
       .text{
         /*display: table-cell和vertical-align: middle;让内容垂直居中*/
         display: table-cell;
@@ -142,6 +177,10 @@
           }
         }
       }
+    }
+    .menu-item-selected{
+      background:#fff;
+
     }
   }
   .foods-wrapper{
