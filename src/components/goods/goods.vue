@@ -68,7 +68,6 @@
         this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
         axios.get('/api/goods').then((response)=>{
           this.goods=response.data;
-          console.log(this.goods,"axios.get('/api/goods').then((response)=>{改成箭头函数，不然this是undefined，数据也是undefined")
         this.$nextTick(()=>{
           // 把this._initScroll()放在this.$nextTick函数里，是因为由于异步原因vue里改变数据后，dom没有变化。所以放在this.$nextTick方法里，当nextTick的时候，初始化_initScroll()
           this._initScroll()
@@ -137,6 +136,7 @@
               }
             })
           })
+          console.log(this.goods, 'foods');
           return foods
         }
       },

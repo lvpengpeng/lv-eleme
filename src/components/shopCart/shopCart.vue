@@ -4,14 +4,16 @@
         <div class="content-left">
           <div class="logo-wrapper">
             <div class="logo">
-              <div class="icon-shopping_cart"></div>
+              <div class="icon-shopping_cart">
+                <span  v-show="totalCount>0">{{totalCount}}</span>
+              </div>
             </div>
           </div>
-          <div class="price">￥2</div>
-          <div class="desc">另需配送费￥25元</div>
+          <div class="price highLight" :class="{highLight:totalCount>0}">￥{{totalPrice}}</div>
+          <div class="desc">另需要配送费￥{{deliveryPrice}}元</div>
         </div>
         <div class="content-right">
-          <div class="pay">￥{{this.minPrice}}元起送</div>
+          <div class="pay" :class="{'enough':totalPrice>=minPrice}"> {{payDesc}}</div>
         </div>
       </div>
     </div>
@@ -23,7 +25,11 @@
       props:{
         selectFoods:{
           type:Array,
-          default:[]
+          default() {
+            return [
+              // {price:10,count:1} 模拟有一物品，如果父组件没有selectFoods，就现实这么默认的了。
+              ]
+          }
         },
         minPrice:{
           type:Number,
@@ -31,11 +37,45 @@
         },
         deliveryPrice:{
           type:Number,
-          default:0
+          default:2
         }
       },
+      // watch: {
+      //   selectFoods (val) {
+      //     console.log(val, '11999');
+      //   }
+      // },
       created(){
-        console.log(this.minPrice,this.deliveryPrice,2222)
+
+      },
+      computed:{
+        totalCount() {
+          console.log(this.selectFoods,222)
+          let count = 0
+          this.selectFoods.forEach((food) => {
+            count += food.count
+          })
+          return count
+        },
+        totalPrice() {
+          let total = 0
+          this.selectFoods.forEach((food) => {
+            if (food.count) {
+              total += food.price * food.count
+            }
+          })
+          return total
+        },
+        payDesc(){
+          let diff = this.minPrice - this.totalPrice
+          if (!this.totalPrice) {
+            return `￥${this.totalPrice}起送`
+          } else if (diff > 0) {
+            return `还差￥${diff}元`
+          } else {
+            return '去结算'
+          }
+        }
       }
     }
 </script>
@@ -56,7 +96,11 @@
             vertical-align: top;
             display: inline-block;
           }
+          .highLight{
+            color: yellow;
+          }
           .logo-wrapper{
+            position: relative;
             display: inline-block;
             vertical-align: top;
             /*.让price和.logo-wrapper和desc都是一行并列，把他们转成（display: inline-block;）行内块，之后统一（vertical-align: top）顶对齐就Ok了*/
@@ -88,6 +132,17 @@
                 height:28px;
                 background: url("./images/cart.png");
                 background-size: cover;
+                span{
+                  width:40px;
+                  height: 22px;
+                  border-radius:22px;
+                  background: red;
+                  position: absolute;
+                  right: -25%;
+                  top: 0;
+                  text-align: center;
+                  line-height: 22px;
+                }
               }
             }
           }
@@ -120,6 +175,10 @@
             text-align: center;
             font-size: 12px;
             font-weight: 700;
+          }
+          .enough{
+            background: aqua;
+            color: blue;
           }
         }
       }
