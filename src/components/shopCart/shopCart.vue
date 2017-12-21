@@ -11,15 +11,32 @@
           <div class="desc">另需配送费￥25元</div>
         </div>
         <div class="content-right">
-          <div class="pay">￥10元起送</div>
+          <div class="pay">￥{{this.minPrice}}元起送</div>
         </div>
       </div>
     </div>
 </template>
 
 <script>
-    export default {
 
+    export default {
+      props:{
+        selectFoods:{
+          type:Array,
+          default:[]
+        },
+        minPrice:{
+          type:Number,
+          default:0
+        },
+        deliveryPrice:{
+          type:Number,
+          default:0
+        }
+      },
+      created(){
+        console.log(this.minPrice,this.deliveryPrice,2222)
+      }
     }
 </script>
 

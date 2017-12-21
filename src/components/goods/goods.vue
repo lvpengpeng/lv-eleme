@@ -41,7 +41,7 @@
           </li>
         </ul>
       </div>
-      <shopCart></shopCart>
+      <shopCart :deliveryPrice="seller.deliveryPrice" :minPrice = "seller.minPrice" :selectFoods="selectFoods"></shopCart>
     </div>
 </template>
 
@@ -59,7 +59,8 @@
           return {
             goods :[],
             listHeight:[],
-            foodsScrollY: 0
+            foodsScrollY: 0,
+            selectFood:[]
           }
       },
 
@@ -67,7 +68,7 @@
         this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
         axios.get('/api/goods').then((response)=>{
           this.goods=response.data;
-          console.log(this.goods,"axios.get('/api/goods').then((response)=>{22222222222222改成箭头函数，111111111不然this是undefined，数据也是undefined")
+          console.log(this.goods,"axios.get('/api/goods').then((response)=>{改成箭头函数，不然this是undefined，数据也是undefined")
         this.$nextTick(()=>{
           // 把this._initScroll()放在this.$nextTick函数里，是因为由于异步原因vue里改变数据后，dom没有变化。所以放在this.$nextTick方法里，当nextTick的时候，初始化_initScroll()
           this._initScroll()
@@ -126,6 +127,17 @@
             }
           }
           return 0
+        },
+        selectFoods() {
+          let foods = []
+          this.goods.forEach((good) => {
+            good.foods.forEach((food) => {
+              if (food.count) {
+                foods.push(food)
+              }
+            })
+          })
+          return foods
         }
       },
       components: {

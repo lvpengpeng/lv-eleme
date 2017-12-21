@@ -12,7 +12,7 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view/>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
@@ -29,10 +29,10 @@ export default {
       seller:{}
     }
   },
-  created() {
+   created() {
         axios.get('/api/seller').then((response)=>{
             this.seller=response.data;
-            console.log(this.seller,"axios.get('/api/goods').then((response)=>{改成箭头函数，不然this是undefined，数据也是undefined")
+            console.log(this.seller,"111111111111111111111111111")
           })
           .catch((error)=> {
               console.log(error);
