@@ -41,12 +41,14 @@
           </li>
         </ul>
       </div>
+      <shopCart></shopCart>
     </div>
 </template>
 
 <script>
   import axios from 'axios'
   import  BScrool from  'better-scroll'
+  import  shopCart from '../shopCart/shopCart.vue'
     export default {
         props:{
          seller :{
@@ -125,6 +127,9 @@
           }
           return 0
         }
+      },
+      components: {
+        shopCart
       }
     }
 </script>
