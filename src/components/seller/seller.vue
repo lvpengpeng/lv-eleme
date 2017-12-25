@@ -1,78 +1,101 @@
 <template>
-  <div class="seller-content">
-    <div class="overview">
-      <h1 class="title">粥品香坊（回龙观）</h1>
-      <div class="desc ">
-        <div>start</div>
-        <span>(24)</span>
-        <span>月销90单</span>
-        <div class="xin">
-          <div class="xin-icon"></div>
-          <div>收藏</div>
+  <div class="seller">
+    <div class="seller-content" ref="sellerWrapper">
+      <div class="overview">
+        <h1 class="title">粥品香坊（回龙观）</h1>
+        <div class="desc ">
+          <div>start</div>
+          <span>(24)</span>
+          <span>月销90单</span>
+          <div class="xin">
+            <div class="xin-icon"></div>
+            <div>收藏</div>
+          </div>
+        </div>
+        <ul class="remark">
+          <li>
+            <h2>11</h2>
+            <span>22</span>分钟
+          </li>
+          <li>
+            <h2>22</h2>
+            <span>33</span>分钟
+          </li>
+          <li>
+            <h2>33</h2>
+            <span>3</span>分钟
+          </li>
+        </ul>
+      </div>
+      <div class="split"></div>
+      <div class="bulletin">
+        <h1>公告与活动</h1>
+        <div class="content-wrapper">
+          <p>粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。</p>
+        </div>
+        <ul class="supports">
+          <li class="support-item">
+            <span></span>
+            <div>在线支付满28减5</div>
+          </li>
+          <li class="support-item">
+            <span></span>
+            <div>在线支付满28减5</div>
+          </li>
+          <li class="support-item">
+            <span></span>
+            <div>在线支付满28减5</div>
+          </li>
+        </ul>
+      </div>
+      <div class="split"></div>
+      <div class="pics">
+        <h2 class="title">商家实景</h2>
+        <div class="pic-wrapper">
+          <ul></ul>
         </div>
       </div>
-      <ul class="remark">
-        <li>
-          <h2>11</h2>
-          <span>22</span>分钟
-        </li>
-        <li>
-          <h2>22</h2>
-          <span>33</span>分钟
-        </li>
-        <li>
-          <h2>33</h2>
-          <span>3</span>分钟
-        </li>
-      </ul>
-    </div>
-    <div class="split"></div>
-    <div class="bulletin">
-      <h1>公告与活动</h1>
-      <div class="content-wrapper">
-        <p>粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。</p>
+      <div class="split"></div>
+      <div class="info">
+        <h2 class="title">商家信息</h2>
+        <ul>
+          <li class="info-item">营业时间:10:00-20:30</li>
+          <li class="info-item">营业时间:10:00-20:30</li>
+          <li class="info-item">营业时间:10:00-20:30</li>
+        </ul>
       </div>
-      <ul class="supports">
-         <li class="support-item">
-           <span></span>
-           <div>在线支付满28减5</div>
-         </li>
-        <li class="support-item">
-          <span></span>
-          <div>在线支付满28减5</div>
-        </li>
-        <li class="support-item">
-          <span></span>
-          <div>在线支付满28减5</div>
-        </li>
-      </ul>
-    </div>
-    <div class="split"></div>
-    <div class="pics">
-      <h2 class="title">商家实景</h2>
-      <div class="pic-wrapper">
-        <ul></ul>
-      </div>
-    </div>
-    <div class="split"></div>
-    <div class="info">
-      <h2 class="title">商家信息</h2>
-      <ul>
-        <li class="info-item">营业时间:10:00-20:30</li>
-        <li class="info-item">营业时间:10:00-20:30</li>
-        <li class="info-item">营业时间:10:00-20:30</li>
-      </ul>
     </div>
   </div>
 </template>
 
 <script>
     export default {
+      created() {
+        this._init()
+      },
+      methods: {
+        _init() {
+            this.$nextTick(() => {
+              this.sellerScroll = new BScroll(this.$refs.sellerWrapper, {
+                click: true
+              })
+              this._initPicScroll()
+            })
 
+        }
+      }
     }
 </script>
 
 <style scoped lang="scss">
+  .seller{
+    position: absolute;
+    top: 174px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
   .seller-content{
     .overview{
       padding: 18px;
