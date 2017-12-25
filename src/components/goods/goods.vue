@@ -33,6 +33,7 @@
                     <span v-show="food.oldPrice" class="oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
+                    <cartControl :food="food"></cartControl>
                     <!--<cartcontrol :food="food"></cartcontrol>-->
                   </div>
                 </div>
@@ -49,6 +50,7 @@
   import axios from 'axios'
   import  BScrool from  'better-scroll'
   import  shopCart from '../shopCart/shopCart.vue'
+  import  cartControl from '../cartControl/cartControl'
     export default {
         props:{
          seller :{
@@ -138,10 +140,14 @@
           })
           console.log(this.goods, 'foods');
           return foods
+        },
+        food(){
+
         }
       },
       components: {
-        shopCart
+        shopCart,
+        cartControl
       }
     }
 </script>
@@ -234,9 +240,14 @@
         }
         .content{
           margin-left: 10px;
+          width: 100%;
           .newPrice{
             font-size: 16px;
             color: red;
+          }
+          .cartcontrol-wrapper{
+           float: right;
+            margin-top: -14px;
           }
         }
       }
