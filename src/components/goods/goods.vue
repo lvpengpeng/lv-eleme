@@ -156,7 +156,7 @@
 .goods{
   display: flex;
   position: absolute;
-  top: 140px;
+  top: 141px;
   bottom: 46px;
   width: 100%;
   overflow:hidden;

@@ -46,6 +46,7 @@ export default {
     display: flex;
     height: 40px;
     line-height: 40px;
+    border-bottom: 1px solid #cccccc;
     width: 100%;
     .tab-item{
       flex: 1;
