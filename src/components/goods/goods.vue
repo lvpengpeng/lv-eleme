@@ -234,6 +234,7 @@
         margin: 18px 18px 0 18px;
         border-bottom: 1px solid #333;
         padding-bottom: 18px;
+        position: relative;
         &:last-child{
           border-bottom: 0;
           padding-bottom: 0;
@@ -246,7 +247,8 @@
             color: red;
           }
           .cartcontrol-wrapper{
-           float: right;
+            position: absolute;
+            right: 0;
             margin-top: -14px;
           }
         }

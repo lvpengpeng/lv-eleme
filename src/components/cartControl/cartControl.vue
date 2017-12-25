@@ -1,8 +1,8 @@
 <template>
     <div class="control-content">
-      <div class="cart-add"  @click="addCart"></div>
-      <div class="cart-count"  v-show="food.count>0">{{food.count}}</div>
       <div class="cart-decrease" v-show="food.count>0"@click.stop.prevent="decreaseCart()"></div>
+      <div class="cart-count"  v-show="food.count>0">{{food.count}}</div>
+      <div class="cart-add"  @click="addCart"></div>
     </div>
 </template>
 
@@ -44,7 +44,6 @@
 
 <style scoped lang="scss">
     .control-content{
-      width:80px;
       height: 24px;
       display: flex;
       justify-content: space-between;
@@ -66,6 +65,8 @@
         display: inline-block;
         line-height: 24px;
         font-size: 20px;
+        width: 24px;
+        text-align: center;
       }
     }
 </style>
