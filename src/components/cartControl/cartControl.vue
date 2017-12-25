@@ -1,6 +1,8 @@
 <template>
     <div class="control-content">
-      <div class="cart-decrease" v-show="food.count>0"@click.stop.prevent="decreaseCart()"></div>
+      <transition name="fadeRotate">
+          <div class="cart-decrease " v-show="food.count>0"@click.stop.prevent="decreaseCart()"></div>
+      </transition>
       <div class="cart-count"  v-show="food.count>0">{{food.count}}</div>
       <div class="cart-add"  @click="addCart"></div>
     </div>
@@ -53,6 +55,14 @@
         height: 24px;
         background:url("./img/减.png");
         background-size: cover;
+        transition: all .4s linear;
+        &.fadeRotate-enter-active, &.fadeRotate-leave-active{
+          transform:translate3d(0,0,0) rotate(0);
+        }
+        &.fadeRotate-enter, &.fadeRotate-leave-active{
+          /*opacity: 0*/
+          transform :translate3d(24px,0,0) rotate(180deg);
+        }
       }
       .cart-add{
         display: inline-block;
@@ -68,5 +78,8 @@
         width: 24px;
         text-align: center;
       }
+      /*.inner{*/
+        /*color:rgb(0,160,220)*/
+      /*}*/
     }
 </style>
