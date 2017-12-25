@@ -1,6 +1,7 @@
 <template>
-  <div class="seller">
-    <div class="seller-content" ref="sellerWrapper">
+  <div class="seller" ref="sellerWrapper">
+    <!--使用better-scroll的时候，在seller获取真实的dom滚动。seller下面的子集必须是一个元素，所以使用seller-content包一下。-->
+    <div class="seller-content" >
       <div class="overview">
         <h1 class="title">粥品香坊（回龙观）</h1>
         <div class="desc ">
@@ -69,21 +70,19 @@
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
     export default {
       created() {
-        this._init()
-      },
-      methods: {
-        _init() {
-            this.$nextTick(() => {
-              this.sellerScroll = new BScroll(this.$refs.sellerWrapper, {
-                click: true
-              })
-              this._initPicScroll()
-            })
+               this._inits()
+            },
+          methods: {
+            _inits() {
+                this.$nextTick(() => {
+                  this.sellerScroll = new BScroll(this.$refs.sellerWrapper)
+                })
 
-        }
-      }
+            }
+          }
     }
 </script>
 
@@ -95,137 +94,137 @@
     left: 0;
     width: 100%;
     overflow: hidden;
-  }
-  .seller-content{
-    .overview{
-      padding: 18px;
-      h1{
-        margin-bottom: 8px;
-        line-height: 4px;
-        color: #07111b;
-        font-size: 14px;
-      }
-      .desc{
-        display: flex;
-        padding-bottom: 18px;
-        border-bottom: 1px solid #cccccc;
-        span{
-          display: inline-block;
-          margin-right: 12px;
-          line-height: 18px;
-          vertical-align: top;
-          font-size: 10px;
-          color: #4d555d;
+    .seller-content{
+      .overview{
+        padding: 18px;
+        h1{
+          margin-bottom: 8px;
+          line-height: 4px;
+          color: #07111b;
+          font-size: 14px;
         }
-        .xin{
-          width: 50px;
-          position:absolute;
-          right: 38px;
-          margin-top: -20px;
+        .desc{
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          .xin-icon{
-            width: 20px;
-            height: 20px;
-            background: url("./img/未收藏.png");
-            background-size: cover;
-          }
-        }
-        }
-      .remark{
-        display: flex;
-        text-align: center;
-        padding-top: 12px;
-        li{
-          flex: 1;
-          border-right:#ccc;
-          h2{
-            margin-bottom: 4px;
-            line-height: 10px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid #cccccc;
+          span{
+            display: inline-block;
+            margin-right: 12px;
+            line-height: 18px;
+            vertical-align: top;
             font-size: 10px;
-            color: #93999f;
+            color: #4d555d;
           }
-          span{
-            font-size: 24px;
+          .xin{
+            width: 50px;
+            position:absolute;
+            right: 38px;
+            margin-top: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .xin-icon{
+              width: 20px;
+              height: 20px;
+              background: url("./img/未收藏.png");
+              background-size: cover;
+            }
           }
-        };
-      }
-      }
-    .split{
-      width: 100%;
-      height: 20px;
-      background: #f3f5f7;
-      border-top: 1px solid rgba(7,17,27,0.1);
-      border-bottom: 1px solid rgba(7,17,27,0.1);
-    }
-    .bulletin{
-      padding: 18px 18px 0 18px;
-      h1{
-        margin-bottom: 8px;
-        line-height: 14px;
-        color: #07111b;
-        font-size: 14px;
-      }
-      .content-wrapper{
-        padding: 0 12px 16px 12px;
-        position: relative;
-        p{
-          line-height: 24px;
-          font-size: 12px;
-          color: #f01414;
-        }
-      }
-      .supports{
-        width: 100%;
-        .support-item{
-          border-top: 1px solid #cccccc;
-          padding: 16px 12px;
+          }
+        .remark{
           display: flex;
-          align-items: center;
-          height: 16px;
-          span{
-            width: 12px;
-            height: 12px;
-            background: red;
-          line-height: 16px;
-          }
-          div{
-            line-height: 16px;
+          text-align: center;
+          padding-top: 12px;
+          li{
+            flex: 1;
+            border-right:#ccc;
+            h2{
+              margin-bottom: 4px;
+              line-height: 10px;
+              font-size: 10px;
+              color: #93999f;
+            }
+            span{
+              font-size: 24px;
+            }
+          };
+        }
+        }
+      .split{
+        width: 100%;
+        height: 20px;
+        background: #f3f5f7;
+        border-top: 1px solid rgba(7,17,27,0.1);
+        border-bottom: 1px solid rgba(7,17,27,0.1);
+      }
+      .bulletin{
+        padding: 18px 18px 0 18px;
+        h1{
+          margin-bottom: 8px;
+          line-height: 14px;
+          color: #07111b;
+          font-size: 14px;
+        }
+        .content-wrapper{
+          padding: 0 12px 16px 12px;
+          position: relative;
+          p{
+            line-height: 24px;
             font-size: 12px;
-            color: #07111b;
-            margin-left: 6px;
+            color: #f01414;
+          }
+        }
+        .supports{
+          width: 100%;
+          .support-item{
+            border-top: 1px solid #cccccc;
+            padding: 16px 12px;
+            display: flex;
+            align-items: center;
+            height: 16px;
+            span{
+              width: 12px;
+              height: 12px;
+              background: red;
+            line-height: 16px;
+            }
+            div{
+              line-height: 16px;
+              font-size: 12px;
+              color: #07111b;
+              margin-left: 6px;
+            }
           }
         }
       }
-    }
-    .pics{
-      padding: 18px;
-      h2{
-        margin-bottom: 12px;
-        line-height: 14px;
+      .pics{
+        padding: 18px;
+        h2{
+          margin-bottom: 12px;
+          line-height: 14px;
+          color: #07111b;
+          font-size: 14px;
+        }
+        .pic-wrapper{
+          width: 100%;
+          height: 90px;
+          background: #666;
+        }
+      }
+      .info{
+        padding: 18px 18px 0 18px;
         color: #07111b;
-        font-size: 14px;
-      }
-      .pic-wrapper{
-        width: 100%;
-        height: 90px;
-        background: #666;
-      }
-    }
-    .info{
-      padding: 18px 18px 0 18px;
-      color: #07111b;
-      .title{
-        padding-bottom: 12px;
-        line-height: 14px;
-        font-size: 14px;
-      }
-      .info-item{
-        padding: 16px 12px;
-        line-height: 16px;
-        font-size: 12px;
-        border-top: 1px solid #cccccc;
+        .title{
+          padding-bottom: 12px;
+          line-height: 14px;
+          font-size: 14px;
+        }
+        .info-item{
+          padding: 16px 12px;
+          line-height: 16px;
+          font-size: 12px;
+          border-top: 1px solid #cccccc;
+        }
       }
     }
   }
