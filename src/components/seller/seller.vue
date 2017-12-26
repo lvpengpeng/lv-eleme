@@ -52,8 +52,10 @@
       <div class="split"></div>
       <div class="pics">
         <h2 class="title">商家实景</h2>
-        <div class="pic-wrapper">
-          <ul></ul>
+        <div class="pic-wrapper" ref="picsWrapper">
+          <div ref="picList">
+            <img v-for="pic in seller.pics" :src="pic" width="120" height="90">
+          </div>
         </div>
       </div>
       <div class="split"></div>
@@ -71,16 +73,41 @@
 
 <script>
   import BScroll from 'better-scroll'
+  import axios from 'axios'
     export default {
+      data() {
+        return {
+          seller: {}
+          ,
+          collectflag: false
+        }
+      },
       created() {
                this._inits()
             },
           methods: {
             _inits() {
+              axios.get('/api/seller').then((res) => {
+                  this.seller =  res.data;
                 this.$nextTick(() => {
-                  this.sellerScroll = new BScroll(this.$refs.sellerWrapper)
+                  this.sellerScroll = new BScroll(this.$refs.sellerWrapper,{
+                    click: true
+                  })
+                  this._initPicScroll()
                 })
-
+              })
+            },
+            _initPicScroll() {
+              if (this.picsScroll) {
+                return
+              }
+              const PIC_WIDTH = 120
+              const MARGIN = 6
+              let picLen = this.seller.pics.length
+              this.$refs.picList.style.width = PIC_WIDTH * picLen + MARGIN * (picLen - 1) + 'px'
+              this.picsScroll = new BScroll(this.$refs.picsWrapper, {
+                scrollX: true
+              })
             }
           }
     }
@@ -207,8 +234,11 @@
         }
         .pic-wrapper{
           width: 100%;
-          height: 90px;
-          background: #666;
+          overflow: hidden;
+          img{
+            width: 116px;
+            margin-right: 6px;
+          }
         }
       }
       .info{
