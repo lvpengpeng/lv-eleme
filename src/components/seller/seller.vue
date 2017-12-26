@@ -8,9 +8,9 @@
           <div>start</div>
           <span>(24)</span>
           <span>月销90单</span>
-          <div class="xin">
-            <div class="xin-icon"></div>
-            <div>收藏</div>
+          <div class="xin" @click="collectflag=!collectflag">
+            <div class="xin-icon" :class="{'active':collectflag}"></div>
+            <div>{{collectflag?'已收藏':'收藏'}}</div>
           </div>
         </div>
         <ul class="remark">
@@ -154,6 +154,12 @@
               width: 20px;
               height: 20px;
               background: url("./img/未收藏.png");
+              background-size: cover;
+            }
+            .active{
+              width: 20px;
+              height: 20px;
+              background: url("./img/已收藏.png");
               background-size: cover;
             }
           }
