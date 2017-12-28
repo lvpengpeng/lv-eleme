@@ -1,5 +1,5 @@
 <template>
-    <div class="ratings">
+    <div class="ratings" ref="ratingsWrapper">
       <div class="ratings-warp">
         <div class="overview">
           <div class="overview-left">
@@ -34,9 +34,73 @@
         </div>
         <div class="evel-list">
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li class="evel" >
+              <div class="avatar">
+                <img  width="28" height="28">
+              </div>
+              <div class="content">
+                  <h4 class="name">3******c</h4>
+                  <div class="start">4颗星</div>
+                  <div class="text">不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.</div>
+                  <div class="zan-title">
+                    <em class="zan"></em>
+                    <ul class="title">
+                      <li>123</li>
+                      <li>41</li>
+                      <li>rere</li>
+                      <li>41</li>
+                      <li>rere</li>
+                      <li>rere</li>
+                    </ul>
+                    <div class="time">12:16</div>
+                  </div>
+              </div>
+            </li>
+            <li class="evel" >
+              <div class="avatar">
+                <img  width="28" height="28">
+              </div>
+              <div class="content">
+                <h4 class="name">3******c</h4>
+                <div class="start">3颗星</div>
+                <div class="text">不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.</div>
+                <div class="zan-title">
+                  <em class="zan"></em>
+                  <ul class="title">
+                    <li>123</li>
+                    <li>41</li>
+                    <li>rere</li>
+                    <li>41</li>
+                    <li>rere</li>
+                    <li>rere</li>
+                  </ul>
+                  <div class="time">12:16</div>
+                </div>
+              </div>
+            </li>
+            <li class="evel" >
+            <div class="avatar">
+              <img  width="28" height="28">
+            </div>
+            <div class="content">
+              <h4 class="name">3******c</h4>
+              <div class="start">5颗星</div>
+              <div class="text">不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.</div>
+              <div class="zan-title">
+                <em class="zan"></em>
+                <ul class="title">
+                  <li>123</li>
+                  <li>41</li>
+                  <li>rere</li>
+                  <li>41</li>
+                  <li>rere</li>
+                  <li>rere</li>
+                </ul>
+                <div class="time">12:16</div>
+              </div>
+            </div>
+          </li>
+
           </ul>
         </div>
       </div>
@@ -44,13 +108,29 @@
 </template>
 
 <script>
+  import  BScrool from  'better-scroll'
     export default {
-
+      created(){
+          this._initScroll()
+        },
+      methods:{
+        _initScroll(){
+          this.$nextTick(() => {
+            this.ratingsScrool = new BScrool(this.$refs.ratingsWrapper, {});
+          })
+        }
     }
+  }
 </script>
 
 <style scoped lang="scss">
 .ratings{
+  position: absolute;
+  top: 130px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
   .ratings-warp{
     .overview{
       padding: 18px 0;
@@ -150,6 +230,62 @@
       }
     }
 
+  }
+  .evel-list{
+    .evel{
+      display:flex;
+      padding :18px 0;
+      margin :0 18px;
+      border-bottom :1px solid rgba(7,17,27,0.1);
+      .avatar{
+        flex :0 0 28px;
+        margin-right: 6px;
+      }
+      .content{
+        position: relative;
+        flex :1;
+        .name{
+          width: 100%;
+          height: 22px;
+        }
+        .start{
+          width: 100%;
+          height: 22px;
+        }
+        .text{
+        }
+        .zan-title{
+          display: flex;
+          .zan{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: url("./img/赞.png");
+            background-size: cover;
+            margin-right: 6px;
+          }
+          .title {
+            flex: 1;
+             li{
+              display: inline-block;
+              width: 40px;
+              height: 20px;
+              line-height: 20px;
+              text-align: center;
+              background: rgba(1,1,1,.3);
+              margin: 0 6px 6px 0;
+               border: 1px solid #cccccc;
+               border-radius: 20px;
+            }
+          }
+          .time{
+            position: absolute;
+            right: 0;
+            top: 0;
+          }
+        }
+      }
+    }
   }
 }
 </style>
